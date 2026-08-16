@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Jinset</title>
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <div class="brand">Jinset</div>
+        <button class="button primary block" id="new-snippet" type="button">New snippet</button>
+      </div>
+
+      <div class="search-wrap">
+        <input class="search" id="search" type="search" placeholder="Search snippets" aria-label="Search snippets">
+      </div>
+
+      <nav class="tree" id="tree" aria-label="Snippets"></nav>
+
+      <div class="sidebar-foot">
+        <button class="button" id="export" type="button">Export</button>
+        <button class="button" id="import" type="button">Import</button>
+        <input type="file" id="import-file" accept="application/json,.json" hidden>
+      </div>
+
+      <div class="credit">
+        Jinset by
+        <a href="https://github.com/zeroyen" target="_blank" rel="noreferrer">David Kamaly</a>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+      <!-- Empty state -->
+      <section class="placeholder" id="placeholder">
+        <div class="placeholder-inner">
+          <h1>No snippet selected</h1>
+          <p>Pick a snippet on the left, or create a new one to get started.</p>
+          <button class="button primary" id="placeholder-new" type="button">New snippet</button>
+        </div>
+      </section>
+
+      <!-- Editor -->
+      <section class="editor-pane" id="editor-pane" hidden>
+        <header class="editor-head">
+          <input class="name-input" id="name" type="text" placeholder="Snippet name" aria-label="Snippet name">
+          <div class="head-actions">
+            <span class="save-state" id="save-state" role="status" aria-live="polite"></span>
+            <label class="switch" title="Enable this snippet">
+              <input type="checkbox" id="enabled">
+              <span></span>
+            </label>
+            <button class="icon-button danger" id="delete" type="button">Delete</button>
+          </div>
+        </header>
+
+        <div class="settings">
+          <div class="field">
+            <label for="apply-to">Apply to</label>
+            <select id="apply-to"></select>
+          </div>
+
+          <div class="field">
+            <label for="type">Type</label>
+            <select id="type">
+              <option value="css">CSS</option>
+              <option value="js">JavaScript</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="timing">Run at</label>
+            <select id="timing">
+              <option value="document_start">Document start</option>
+              <option value="dom_ready">DOM ready</option>
+              <option value="load">After load</option>
+            </select>
+          </div>
+
+          <div class="field checkbox-field js-only">
+            <label class="checkbox">
+              <input type="checkbox" id="keep-alive">
+              <span>Keep alive</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pattern-row" id="pattern-row" hidden>
+          <label for="pattern-input">Match pattern</label>
+          <input class="pattern-input" id="pattern-input" type="text" spellcheck="false"
+                 placeholder="*://*.example.com/*">
+          <span class="pattern-hint" id="pattern-hint"></span>
+        </div>
+
+        <div class="notice" id="notice" hidden></div>
+
+        <div class="editor-host" id="editor-host"></div>
+
+        <footer class="editor-foot">
+          <span class="hint" id="hint"></span>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="manager.js"></script>
+</body>
+</html>
